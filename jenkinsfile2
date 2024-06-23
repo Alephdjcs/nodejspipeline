@@ -20,3 +20,11 @@ node {
      }
    }
 }
+
+// Custom step to increase stop timeout
+def stopContainerWithTimeout(containerId, timeout = 10) {
+  sh "docker stop --time=${timeout} ${containerId}"
+}
+
+// Invoke the custom stop function
+stopContainerWithTimeout('b2f634a922f767e9ea155bc80b3f3b951212d9049fa7fac26155885bfc4be5a8', 10)
