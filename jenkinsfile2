@@ -18,23 +18,5 @@ node {
       def nuestraapp = docker.build("danjcs/nodejsapp:${gitcommit}", ".")
       nuestraapp.push()
      }
-   post {
-        always {
-            script {
-                // Clean up any exited containers
-                try {
-                    sh 'docker container prune -f'
-                } catch (Exception e) {
-                    echo "Error during Docker container cleanup: ${e.message}"
-                }
-            }
-            cleanWs()
-        }
-        success {
-            echo 'Pipeline completed successfully!'
-        }
-        failure {
-            echo 'Pipeline failed!'
-        }
    }
 }
